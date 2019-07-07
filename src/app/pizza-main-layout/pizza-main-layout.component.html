@@ -1,0 +1,41 @@
+<mat-sidenav-container class="pizza-container">
+  
+  <!-- Side nav -->
+  <mat-sidenav mode="side" class="pizza-sidenav" opened>
+    
+    <br/>
+    <form>
+      <mat-form-field>
+        <mat-select (selectionChange)="search()" [(ngModel)]="selectedBase" placeholder="Base" name="base">
+          <mat-option *ngFor="let base of bases" [value]="base.value">
+            {{base.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br/>
+      
+    </form>
+  </mat-sidenav>
+
+  <!-- Main content -->
+  <mat-sidenav-content>
+
+    <mat-card *ngFor="let pizza of pizzas$ | async" class="pizza-card">
+      <mat-card-header class="pizza-card-header">
+        
+      </mat-card-header>
+      <mat-card-content>
+        <img width="150" src="{{pizza.image}}" alt="Photo of pizza">
+        <ul class="pizza-list">
+          <li>{{pizza.type}}</li>
+          <li>{{pizza.pizza}}</li>
+
+        </ul>
+      </mat-card-content>
+      <div class="pizza-card-bottom">Rs. {{pizza.price}} /-</div>
+      <mat-card-actions class="pizza-card-bottom">
+        <button routerLink="/detail/{{pizza.id}}" mat-raised-button>ADD</button>
+      </mat-card-actions>
+    </mat-card>
+  </mat-sidenav-content>
+</mat-sidenav-container>
